@@ -1,50 +1,54 @@
-name: Deploy to GitHub Pages
+name: CI
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: 'main'
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Set the correct permissions to deploy the new commit to pages
+permissions:
+  contents: write
+  pages: write
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build_site:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout
-        uses: actions/checkout@v7
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+        with: 
+          node-version: '18'
 
-      - name: Install Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: 20
-          cache: npm
-
-      - name: Install dependencies
-        run: npm i
-
-      - name: build
-        env:
-          BASE_PATH: '/${{ github.event.repository.name }}'
+      # Generate all necessary files for the app
+      - name: run npm necessary commands
         run: |
+          npm install
           npm run build
 
-      - name: Upload Artifacts
-        uses: actions/upload-pages-artifact@v5
+      - name: Init new repo in dist folder and commit generated files
+        run: |
+          cd output
+          git init
+          git add -A
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m 'deploy'
+
+      - name: Force push to destination branch
+        uses: ad-m/github-push-action@v0.6.0
         with:
-          # this should match the `pages` option in your adapter-static options
-          path: 'output/'
-
-  deploy:
-    needs: build_site
-    runs-on: ubuntu-latest
-
-    permissions:
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v5
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: gh-pages
+          force: true
+          directory: ./output
