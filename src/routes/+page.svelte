@@ -80,7 +80,7 @@
   </div>
   <img 
     alt="Capa do periódico Novo Correio de Modas." 
-    src="/novo-correio-de-modas-capa-o-flibusteiro.jpg"
+    src={resolve("/novo-correio-de-modas-capa-o-flibusteiro.jpg")}
     class="pointer-events-none absolute right-8 top-1/2 w-95 -translate-y-1/2 rotate-10 opacity-20 shadow-2xl lg:w-112.5 lg:opacity-90"
   />
 </section>
@@ -148,7 +148,7 @@
     Faz parte da obra Illustrated atlas and modern history, publicada por John Tallis. 
     Como todos os mapas desse atlas, caracteriza-se pelas belas ilustrações. 
     O Brasil está representado com as divisões administrativas, além de constarem o Paraguai e o Uruguai. " 
-      src="mapa-brasil-footer.png"
+      src={resolve("mapa-brasil-footer.png")}
       class="absolute top-0 left-0 right-0 w-full opacity-20"
     />
   </div>

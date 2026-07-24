@@ -6,7 +6,7 @@
 <!-- <nav class="relative w-full bg-cream border-b border-beige">
   <div class="mx-auto max-w-7xl px-6 py-3">
     <ol class="flex items-center gap-2 text-sm text-brown-mid">
-      <li><a href="/" class="hover:text-brown-dark transition-colors">Início</a></li>
+      <li><a href={resolve("/")} class="hover:text-brown-dark transition-colors">Início</a></li>
       <li><span class="text-brown-mid">/</span></li>
       <li class="text-brown-dark font-medium">Sobre o Projeto</li>
     </ol>
@@ -219,7 +219,7 @@
       <div class="md:w-1/2 relative min-h-75">
         <!-- https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80 -->
         <!-- Fonte da imagem: https://unsplash.com/photos/stack-of-six-brown-hardbound-books-9T346Ij4kGk -->
-        <img src="/chris-lawton-9T346Ij4kGk-unsplash.jpg" alt="Livros antigos em uma mesa de madeira. Foto por Chris Lawton obtida no site Unsplash." class="absolute inset-0 w-full h-full object-cover grayscale opacity-80 sepia-[.3]" />
+        <img src={resolve("/chris-lawton-9T346Ij4kGk-unsplash.jpg")} alt="Livros antigos em uma mesa de madeira. Foto por Chris Lawton obtida no site Unsplash." class="absolute inset-0 w-full h-full object-cover grayscale opacity-80 sepia-[.3]" />
         <div class="absolute inset-0 bg-linear-to-r from-[#f4f1ea] to-transparent md:w-1/3"></div>
       </div>
     </div>
