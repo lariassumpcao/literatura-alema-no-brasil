@@ -16,7 +16,8 @@ const config = {
 		appDir: 'app',
 		paths: {
 			base: '/literatura-alema-no-brasil'
-		}
+		},
+		trailingSlash: 'always', 
 	},
 };
 

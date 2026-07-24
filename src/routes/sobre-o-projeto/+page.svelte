@@ -14,8 +14,7 @@
 </nav> -->
 
 <script>
-  // No specific logic needed for this static page, 
-  // but you can add imports here if needed.
+  import { resolve } from '$app/paths';
 </script>
 
 <!-- Import Google Fonts for the specific look -->
@@ -53,7 +52,7 @@
 
     <div class="relative max-w-7xl mx-auto px-6 py-20 lg:py-32">
       <div class="text-xs text-stone-500 mb-6 flex items-center gap-2">
-        <a href="/" class="hover:text-stone-900">Início</a>
+        <a href={resolve("/")} class="hover:text-stone-900">Início</a>
         <span>/</span>
         <span class="text-stone-900 font-medium">Sobre o projeto</span>
       </div>
@@ -211,7 +210,7 @@
           Navegue, explore e utilize os dados deste repositório livremente para fins de pesquisa, ensino e difusão do conhecimento.
         </p>
         <div>
-          <a href="/obras" class="inline-flex items-center gap-2 bg-brown-mid hover:bg-brown-warm text-white px-6 py-3 rounded-sm text-sm font-medium transition-colors">
+          <a href={resolve("/obras")} class="inline-flex items-center gap-2 bg-brown-mid hover:bg-brown-warm text-white px-6 py-3 rounded-sm text-sm font-medium transition-colors">
             Explorar a coleção
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
           </a>

@@ -10,6 +10,7 @@
         ArrowRight,
         Quote,
     } from "lucide-svelte";
+    import { resolve } from '$app/paths';
 
     const features = $derived([
         {
@@ -59,7 +60,7 @@
           Brasil.
         </p>
         <a
-          href="/obras"
+          href={resolve("/obras")}
           class="mt-8 inline-flex items-center gap-2 border border-brown-dark px-6 py-3 text-sm font-medium text-brown-dark transition-all hover:bg-brown-dark hover:text-cream"
         >
           Explorar a coleção
@@ -124,7 +125,7 @@
         transatlântica da literatura."
       </blockquote>
       <a
-        href="/sobre-o-projeto"
+        href={resolve("/sobre-o-projeto")}
         class="mt-10 inline-flex underline items-center gap-2 text-md font-medium text-brown-mid transition-colors hover:text-brown-dark"
       >
         Sobre o projeto

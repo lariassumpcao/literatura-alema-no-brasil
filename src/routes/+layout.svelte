@@ -1,7 +1,7 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
 	import "$lib/shared.css";
-	import { BookOpen } from "lucide-svelte";
+	import { resolve } from '$app/paths';
 
     const navLinks = [
         {"label": "Catálogo", "href": "/obras"},
@@ -23,15 +23,15 @@
 <div class="flex w-full justify-center bg-offwhite">
 	<div class="flex flex-col items-center w-180 lg:w-360">
 		<!-- <nav class="flex flex-row h-10 justify-center gap-8 mb-4">
-			<a class="h-10 justify-center" href="/">Início</a>
-			<a class="" href="/autores">Lista de autores</a>
-			<a class="" href="/obras">Lista de obras</a>
+			<a class="h-10 justify-center" href={resolve("/")}>Início</a>
+			<a class="" href={resolve("/autores")}>Lista de autores</a>
+			<a class="" href={resolve("/obras")}>Lista de obras</a>
 		</nav> -->
 
 		<nav class="relative z-20 border-b border-beige bg-cream w-full">
 			<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 h-20">
 				<!-- Logo -->
-				<a href="/">
+				<a href={resolve("/")}>
 					<div class="flex items-center gap-3">
 						<!-- <BookOpen class="h-7 w-7 text-brown-dark" stroke-width={1.5} /> -->
 						{@html livro_aberto}
@@ -51,7 +51,7 @@
 				{#each navLinks as link}
 					<li>
 					<a
-						href="{link.href}"
+						href={resolve(link.href)}
 						class="text-[18px] text-brown-mid transition-colors hover:text-brown-dark"
 					>
 						{link.label}
@@ -74,7 +74,7 @@
 		<footer class="bg-brown-dark text-stone-300 pt-12 pb-4 mt-auto w-full">
 			<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
 				<!-- Logo -->
-				<a href="/">
+				<a href={resolve("/")}>
 					<div class="flex items-center gap-3">
 						<svg class="w-8 h-8 text-stone-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
 						<div class="text-xs font-semibold tracking-wider leading-tight uppercase">
@@ -87,7 +87,7 @@
 				<nav class="flex flex-wrap justify-center gap-6 text-sm">
 					{#each navLinks as link}
 						<a
-							href="{link.href}"
+							href={resolve(link.href)}
 							class="hover:text-white transition-colors"
 						>
 							{link.label}
