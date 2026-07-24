@@ -1,5 +1,4 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
 	import "$lib/shared.css";
 	import { resolve } from '$app/paths';
 
