@@ -28,7 +28,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
         with: 
-          node-version: '18'
+          node-version: '24'
 
       # Generate all necessary files for the app
       - name: run npm necessary commands

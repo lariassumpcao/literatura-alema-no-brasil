@@ -1,6 +1,6 @@
 <script lang="ts">
     let { data } = $props(); 
-    import Obra from '$lib/components/Obra.svelte';
+    import { resolve } from '$app/paths';
 
     import {
         ArrowRight,
@@ -48,9 +48,9 @@
 <nav class="relative w-full bg-cream border-b border-beige">
   <div class="mx-auto max-w-7xl px-6 py-3">
     <ol class="flex items-center gap-2 text-sm text-brown-mid">
-      <li><a href="/" class="hover:text-brown-dark transition-colors">Início</a></li>
+      <li><a href={resolve("/")} class="hover:text-brown-dark transition-colors">Início</a></li>
       <li><span class="text-brown-mid">/</span></li>
-      <li><a href="/autores" class="hover:text-brown-dark transition-colors">Autores</a></li>
+      <li><a href={resolve("/autores")} class="hover:text-brown-dark transition-colors">Autores</a></li>
       <li><span class="text-brown-mid">/</span></li>
       <li class="text-brown-dark font-medium">{data.autor.nome} {data.autor.sobrenome}</li>
     </ol>
@@ -218,7 +218,7 @@
           </p>
         </div>
         <!-- <a
-          href="/obras"
+          href={resolve("/obras")}
           class="inline-flex items-center gap-2 px-4 py-2 border border-brown-mid/30 rounded-sm text-sm font-medium text-brown-dark hover:bg-brown-dark hover:text-cream hover:border-brown-dark transition-all"
         >
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -243,7 +243,7 @@
         <div class="divide-y divide-beige">
           {#each data.obras_autor as obra}
             <a
-              href="/obras/{obra.url_simples}"
+              href="{resolve("/obras")}/{obra.url_simples}"
               class="grid grid-cols-1 md:grid-cols-8 gap-3 md:gap-4 px-4 py-5 hover:bg-beige/30 transition-colors group"
             >
               <!-- Obra -->

@@ -2,6 +2,7 @@
     import Obra from '$lib/components/Obra.svelte';
     let { data } = $props();
     import { Search, ChevronDown } from "lucide-svelte";
+    import { resolve } from '$app/paths';
 
     const livro_placeholder = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
@@ -105,7 +106,7 @@
 <nav class="relative w-full bg-cream border-b border-beige">
   <div class="mx-auto max-w-7xl px-6 py-3">
     <ol class="flex items-center gap-2 text-sm text-brown-mid">
-      <li><a href="/" class="hover:text-brown-dark transition-colors">Início</a></li>
+      <li><a href={resolve("/")} class="hover:text-brown-dark transition-colors">Início</a></li>
       <li><span class="text-brown-mid">/</span></li>
       <li class="text-brown-dark font-medium">Obras</li>
     </ol>
@@ -378,7 +379,7 @@
                 </div>
                 
                 <a 
-                href="/obras/{obra.url_simples}" 
+                href="{resolve("/obras")}/{obra.url_simples}"
                 class="px-4 py-2 border border-brown-mid/30 rounded-sm text-sm font-medium text-brown-dark hover:bg-brown-dark hover:text-cream hover:border-brown-dark transition-all"
                 >
                 Ver detalhes

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Autor from '$lib/components/Autor.svelte';
+    import { resolve } from '$app/paths';
     import { Search, ChevronDown } from "lucide-svelte";
 
     // SVG Profile Placeholders
@@ -101,7 +101,7 @@
 <nav class="relative w-full bg-cream border-b border-beige">
   <div class="mx-auto max-w-7xl px-6 py-3">
     <ol class="flex items-center gap-2 text-sm text-brown-mid">
-      <li><a href="/" class="hover:text-brown-dark transition-colors">Início</a></li>
+      <li><a href={resolve("/")} class="hover:text-brown-dark transition-colors">Início</a></li>
       <li><span class="text-brown-mid">/</span></li>
       <li class="text-brown-dark font-medium">Autores</li>
     </ol>
@@ -331,7 +331,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-4">
           {#each autores_filtrados as autor}
             <article class="bg-cream border border-beige rounded-sm p-4 hover:shadow-lg transition-shadow group">
-              <a href="/autores/{autor.url_simples}">
+              <a href="{resolve("/autores")}/{autor.url_simples}">
                 <!-- Profile Image -->
                 <div class="mb-4 overflow-hidden rounded-sm bg-beige aspect-4/5">
                     {@html getSVGPerfil("desconhecido")}

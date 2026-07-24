@@ -1,10 +1,8 @@
 <script lang="ts">
     let { data } = $props(); 
-    import Edicao from "$lib/components/Edicao.svelte";
+    import { resolve } from '$app/paths';
 
     import {
-        ArrowLeft,
-        ArrowRight,
         BookOpen,
     } from "lucide-svelte";
 
@@ -93,9 +91,9 @@
 <nav class="relative w-full bg-cream border-b border-beige">
   <div class="mx-auto max-w-7xl px-6 py-3">
     <ol class="flex items-center gap-2 text-sm text-brown-mid">
-      <li><a href="/" class="hover:text-brown-dark transition-colors">Início</a></li>
+      <li><a href={resolve("/")} class="hover:text-brown-dark transition-colors">Início</a></li>
       <li><span class="text-brown-mid">/</span></li>
-      <li><a href="/obras" class="hover:text-brown-dark transition-colors">Obras</a></li>
+      <li><a href={resolve("/obras")} class="hover:text-brown-dark transition-colors">Obras</a></li>
       <li><span class="text-brown-mid">/</span></li>
       <li class="text-brown-dark font-medium">{data.obra.nome}</li>
     </ol>
@@ -223,8 +221,7 @@
         <!-- Table Rows -->
         <div class="divide-y divide-beige">
           {#each data.obra.edicoes as edicao}
-            <a
-              href="#"
+            <a href="#"
               class="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 px-4 py-5 hover:bg-beige/30 transition-colors group"
             >
               <!-- Título da edição -->
