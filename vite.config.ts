@@ -7,4 +7,5 @@ export default defineConfig({
 		tailwindcss(),	
 		sveltekit(),
 	],
+	base: "/literatura-alema-no-brasil"
 });
