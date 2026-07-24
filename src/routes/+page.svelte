@@ -148,7 +148,7 @@
     Faz parte da obra Illustrated atlas and modern history, publicada por John Tallis. 
     Como todos os mapas desse atlas, caracteriza-se pelas belas ilustrações. 
     O Brasil está representado com as divisões administrativas, além de constarem o Paraguai e o Uruguai. " 
-      src={resolve("mapa-brasil-footer.png")}
+      src={resolve("/mapa-brasil-footer.png")}
       class="absolute top-0 left-0 right-0 w-full opacity-20"
     />
   </div>
