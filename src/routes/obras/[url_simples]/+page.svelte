@@ -221,7 +221,7 @@
         <!-- Table Rows -->
         <div class="divide-y divide-beige">
           {#each data.obra.edicoes as edicao}
-            <a href={resolve("#")}
+            <span
               class="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 px-4 py-5 hover:bg-beige/30 transition-colors group"
             >
               <!-- Título da edição -->
@@ -265,7 +265,7 @@
                 {/if}
                 </span>
               </div>
-            </a>
+            </span>
           {/each}
         </div>
       </div>
