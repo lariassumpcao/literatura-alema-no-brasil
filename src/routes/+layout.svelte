@@ -16,10 +16,6 @@
 	`;
 </script>
 
-<svelte:head>
-	<link rel="icon" href={favicon} />
-</svelte:head>
-
 <div class="flex w-full justify-center bg-offwhite">
 	<div class="flex flex-col items-center w-180 lg:w-360">
 		<!-- <nav class="flex flex-row h-10 justify-center gap-8 mb-4">
