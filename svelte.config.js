@@ -15,9 +15,8 @@ const config = {
 		adapter: adapter({ pages: 'output/', assets: 'output/', fallback: 'index.html', }),
 		appDir: 'app',
 		paths: {
-			base: '/literatura-alema-no-brasil'
+			base: process.argv.includes('dev') ? '' : '/literatura-alema-no-brasil'
 		},
-		trailingSlash: 'always', 
 	},
 };
 
