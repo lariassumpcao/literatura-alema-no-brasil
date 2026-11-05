@@ -1,57 +1,21 @@
 <script lang="ts">
-    import Obra from '$lib/components/Obra.svelte';
     let { data } = $props();
     import { Search, ChevronDown } from "lucide-svelte";
     import { resolve } from '$app/paths';
 
-    const livro_placeholder = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
-    <defs>
-    <!-- Papel falso simulado -->
-    <linearGradient id="paper-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#F7F4EE" stop-opacity="0.4"/>
-        <stop offset="100%" stop-color="#6B5E4E" stop-opacity="0.15"/>
-    </linearGradient>
-    </defs>
-    
-    <!-- Base -->
-    <rect width="100" height="140" fill="#E9E2D5"/>
-    <rect width="100" height="140" fill="url(#paper-grad)"/>
-    
-    <!-- Borda dupla -->
-    <rect x="6" y="6" width="88" height="128" fill="none" stroke="#6B5E4E" stroke-width="0.8" opacity="0.6"/>
-    <rect x="10" y="10" width="80" height="120" fill="none" stroke="#6B5E4E" stroke-width="0.4" opacity="0.4"/>
-    
-    <!-- Título simulado -->
-    <rect x="25" y="22" width="50" height="2" fill="#3E3128" opacity="0.7"/>
-    <rect x="30" y="28" width="40" height="2" fill="#3E3128" opacity="0.7"/>
-    <rect x="20" y="34" width="60" height="2" fill="#3E3128" opacity="0.7"/>
-    
-    <!-- Decoração -->
-    <circle cx="50" cy="70" r="12" fill="none" stroke="#A67C52" stroke-width="1" opacity="0.6"/>
-    <circle cx="50" cy="70" r="8" fill="none" stroke="#A67C52" stroke-width="0.5" opacity="0.6"/>
-    <path d="M50 58 L50 82 M38 70 L62 70" stroke="#A67C52" stroke-width="0.5" opacity="0.6"/>
-    <circle cx="50" cy="70" r="2" fill="#A67C52" opacity="0.6"/>
-    
-    <!-- Texto simulado -->
-    <rect x="35" y="102" width="30" height="1.5" fill="#3E3128" opacity="0.6"/>
-    <rect x="30" y="108" width="40" height="1.5" fill="#3E3128" opacity="0.6"/>
-    <rect x="40" y="118" width="20" height="1.5" fill="#3E3128" opacity="0.5"/>
-    </svg>
-    `
-
-    const divisor_decorativo_antigo = `
-        <svg width="16" height="16" viewBox="0 0 16 16" class="text-brown-warm shrink-0">
-        <path d="M8 0 L16 8 L8 16 L0 8 Z" fill="currentColor" opacity="0.6"/>
-        <circle cx="8" cy="8" r="2" fill="currentColor"/>
-        </svg>
-    `
+    import cabecalho_obras from '$lib/assets/obras-header.png';
+    import livro_placeholder from '$lib/assets/capa-livro.svg';
+    // import { obras } from "$lib/bd.js";
 
     let busca_nome = $state("");
     let data_minimo = $derived(data.primeira_publicacao);
     let data_maximo = $derived(data.ultima_publicacao);
     let autoresSelecionados = $state<string[]>([]);
     let ordenar_por = $state("nome-crescente");
+    let mostrar_sem_data = $state(true);
+    let obras_sem_data = $derived(
+      data.obras.filter((obra) => obra.publicacao <= 0).length
+    );
 
     let obras_filtradas = $derived(
         data.obras.filter(obra => {
@@ -59,7 +23,10 @@
                 obra.nome.toLowerCase().includes(busca_nome.toLowerCase()) ||
                 `${obra.autor?.nome} ${obra.autor?.sobrenome}`.toLowerCase().includes(busca_nome.toLowerCase())
             
-            const match_datas = (obra.publicacao <= data_maximo && obra.publicacao >= data_minimo);
+            const sem_data = obra.publicacao <= 0;
+            const match_datas = sem_data
+                ? mostrar_sem_data
+                : (obra.publicacao >= data_minimo && obra.publicacao <= data_maximo);
             
             const match_autor = autoresSelecionados.length === 0 || 
                 autoresSelecionados.includes(`${obra.autor?.nome} ${obra.autor?.sobrenome}`);
@@ -83,18 +50,19 @@
     );
     
     function limparFiltros() {
-        busca_nome = "";
-        data_minimo = data.primeira_publicacao;
-        data_maximo = data.ultima_publicacao;
-        ordenar_por = "nome-crescente";
+      busca_nome = "";
+      data_minimo = data.primeira_publicacao;
+      data_maximo = data.ultima_publicacao;
+      ordenar_por = "nome-crescente";
+      mostrar_sem_data = true;
     }
 
     function toggleAutor(nome_autor: string) {
-        if (autoresSelecionados.includes(nome_autor)) {
-        autoresSelecionados = autoresSelecionados.filter(c => c !== nome_autor);
-        } else {
-        autoresSelecionados = [...autoresSelecionados, nome_autor];
-        }
+      if (autoresSelecionados.includes(nome_autor)) {
+      autoresSelecionados = autoresSelecionados.filter(c => c !== nome_autor);
+      } else {
+      autoresSelecionados = [...autoresSelecionados, nome_autor];
+      }
     }
 
 </script>
@@ -114,10 +82,12 @@
 </nav>
 
 <!-- Header -->
-<header class="bg-cream relative overflow-hidden w-full">
+<header class="bg-cream relative overflow-hidden w-full h-66">
     <div 
-    class="absolute inset-0 bg-[url('/obras-header.png')] bg-cover bg-center"
-    ></div>
+    class="absolute inset-0 overflow-hidden"
+    >
+      <img class="w-full h-full object-cover object-right" src={cabecalho_obras} alt="Cabeçalho da área dos autores."/>
+    </div>
     <div class="absolute inset-0 bg-cream/70 pointer-events-none"></div>
 
     <div class="relative z-10 mx-auto max-w-7xl px-6 py-12">
@@ -129,7 +99,10 @@
             <!-- Custom Decorative Line -->
             <div class="flex items-center gap-4 my-6 max-w-md">
                 <div class="h-px flex-1 bg-brown-mid/40"></div>
-                {@html divisor_decorativo_antigo}
+                <svg width="16" height="16" viewBox="0 0 16 16" class="text-brown-warm shrink-0">
+                  <path d="M8 0 L16 8 L8 16 L0 8 Z" fill="currentColor" opacity="0.6"/>
+                  <circle cx="8" cy="8" r="2" fill="currentColor"/>
+                </svg>
                 <div class="h-px flex-1 bg-brown-mid/40"></div>
             </div>
 
@@ -139,12 +112,6 @@
             </p>
         </div>
     </div>
-    
-  
-  <!-- Decorative background element
-  <div class="absolute top-0 right-0 w-1/3 h-full opacity-10 pointer-events-none">
-    <div class="h-full bg-linear-to-l from-brown-dark to-transparent"></div>
-  </div> -->
 </header>
 
 <!-- Main Content -->
@@ -153,14 +120,14 @@
     <div class="flex flex-col lg:flex-row gap-8">
       
       <!-- Sidebar Filters -->
-      <aside class="w-full lg:w-64 shrink-0">
+      <aside class="w-full lg:w-72 shrink-0">
         <div class="bg-beige/40 border border-beige rounded-sm p-6 sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
           <!-- Fixed Header Layout -->
         <div class="flex items-start justify-between mb-8 pb-6 border-b border-beige">
         <div class="flex items-center gap-3">
             <!-- <SlidersHorizontal class="w-5 h-5 text-brown-mid mt-1 flex-shrink-0" stroke-width={1.5} /> -->
             <h2 class="font-serif text-lg font-bold text-brown-dark leading-tight">
-            Filtrar autores
+            Filtrar obras
             </h2>
         </div>
         <button 
@@ -183,7 +150,7 @@
                 name="busca-nome"
                 type="text"
                 bind:value={busca_nome}
-                placeholder="Nome do autor..."
+                placeholder="Nome do autor, da obra..."
                 class="w-full px-3 py-2 pr-10 border border-beige rounded-sm bg-cream text-brown-dark placeholder-brown-mid/50 focus:outline-none focus:border-brown-warm text-sm"
               />
               <Search class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brown-mid" />
@@ -285,6 +252,28 @@
             </div>
         </div>
 
+        <!-- Toggle: show works without date -->
+        <div class="mt-4">
+          <label class="flex items-start gap-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              bind:checked={mostrar_sem_data}
+              class="w-4 h-4 mt-0.5 rounded-sm border-beige text-brown-warm focus:ring-brown-warm focus:ring-offset-0 accent-brown-warm cursor-pointer"
+            />
+            <div>
+              <span class="text-sm text-brown-dark group-hover:text-brown-warm transition-colors">
+                Mostrar obras sem data de publicação 
+                {#if obras_sem_data > 0}
+                  ({obras_sem_data} {obras_sem_data > 1 ? 'obras' : 'obra'})
+                {/if}
+              </span>
+              <p class="text-xs text-brown-mid/70 mt-0.5 mb-4 leading-relaxed">
+                Como essas obras não possuem ano de publicação preciso, o filtro por período não se aplica a elas.
+              </p>
+            </div>
+          </label>
+        </div>
+
         <!-- Autores -->
         <div class="mb-8">
         <label for="" class="block text-sm font-semibold text-brown-dark mb-4 tracking-wide uppercase text-[11px]">
@@ -339,7 +328,7 @@
       <div class="flex-1">
         <div class="flex items-center justify-between mb-6">
           <p class="text-brown-dark font-serif text-lg">
-            {obras_filtradas.length} {#if obras_filtradas.length > 1}obras encontradas{:else}obra encontrada{/if}
+            {obras_filtradas.length} {#if obras_filtradas.length > 1}obras encontradas{:else}obra encontrada{/if} de um total de {data.obras.length}.
           </p>
         </div>
 
@@ -350,7 +339,7 @@
       
             <!-- 1. Cover Image (SVG Placeholder) -->
             <div class="w-20 h-28 sm:w-24 sm:h-32 shrink-0 bg-beige rounded-sm overflow-hidden shadow-sm border border-brown-mid/10">
-                {@html livro_placeholder}
+                <img class="" src={livro_placeholder} alt="Capa do livro" />
             </div>
 
             <!-- 2. Main Information -->
@@ -362,7 +351,7 @@
                 {/if} -->
                 </h3>
                 
-                <p class="text-sm font-medium text-brown-dark mb-1">{@html `${obra.autor?.nome} <b>${obra.autor?.sobrenome}</b>`}</p>
+                <p class="text-sm font-medium text-brown-dark mb-1">{@html `${obra.autor?.nome ? obra.autor?.nome : 'autor'} <b>${obra.autor?.sobrenome ? obra.autor?.sobrenome : 'desconhecido'}</b>`}</p>
                 
                 <!-- {#if obra.tradutor}
                 <p class="text-sm text-brown-mid mb-1">Tradução de {obra.tradutor}</p>
@@ -374,7 +363,7 @@
             <!-- 3. Metadata & Action Button -->
             <div class="flex flex-row sm:flex-col items-start sm:items-end justify-between sm:justify-center gap-3 sm:gap-4 sm:min-w-35 pt-2 sm:pt-0">
                 <div class="text-right">
-                <p class="text-sm font-semibold text-brown-dark">{obra.publicacao}</p>
+                <p class="text-sm font-semibold text-brown-dark">{obra.publicacao > 0 ? obra.publicacao : '--'}</p>
                 <p class="text-sm font-semibold text-brown-dark">{obra.edicoes.length} {#if obra.edicoes.length > 1} edições cadastradas{:else} edição cadastrada{/if}</p>
                 </div>
                 

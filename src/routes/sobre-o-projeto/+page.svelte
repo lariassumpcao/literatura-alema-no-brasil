@@ -15,6 +15,9 @@
 
 <script>
   import { resolve } from '$app/paths';
+  import imagem_cabecalho from '$lib/assets/sobre-o-projeto-header.png';
+  import imagem_livro from '$lib/assets/sobre-o-projeto-header.png';
+  import livros_antigos from '$lib/assets/chris-lawton-9T346Ij4kGk-unsplash.jpg';
 </script>
 
 <!-- Import Google Fonts for the specific look -->
@@ -37,7 +40,7 @@
      <!-- https://images.unsplash.com/photo-1524661135-423995f22d0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80 -->
     <div class="absolute inset-0 opacity-15 pointer-events-none">
       <!-- Fonte da imagem: https://objdigital.bn.br/objdigital2/acervo_digital/div_cartografia/cart354236/cart354236.htm -->
-      <img src={resolve("/sobre-o-projeto-header.png")} alt="Old Map" class="w-full h-full object-cover grayscale sepia-[.3]" />
+      <img src={imagem_cabecalho} alt="Old Map" class="w-full h-full object-cover grayscale sepia-[.3]" />
     </div>
     
     <!-- Decorative Book Page Simulation -->
@@ -48,7 +51,7 @@
        <div class="text-[10px] mt-8">TOMO IV.</div>
        <div class="text-[10px] mt-12">LISBOA,<br>NA TYPOGRAPHIA ROLLANDIANA.<br>1852.</div>
     </div> -->
-    <img src={resolve("/sobre-o-projeto-livro.jpeg")} alt="" class="absolute top-4 right-1/12 w-86 h-130 bg-cream shadow-xl rotate-3 border border-stone-300 hidden lg:block opacity-60 p-2 flex flex-col items-center justify-center text-center"/>
+    <img src={imagem_livro} alt="" class="absolute top-4 right-1/12 w-86 h-130 bg-cream shadow-xl rotate-3 border border-stone-300 hidden lg:block opacity-60 p-2 flex flex-col items-center justify-center text-center"/>
 
     <div class="relative max-w-7xl mx-auto px-6 py-20 lg:py-32">
       <div class="text-xs text-stone-500 mb-6 flex items-center gap-2">
@@ -61,7 +64,11 @@
       
       <div class="flex items-center gap-4 mb-8">
         <div class="h-px w-16 bg-stone-400"></div>
-        <svg class="w-4 h-4 text-stone-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+        <!-- <svg class="w-4 h-4 text-stone-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg> -->
+        <svg width="16" height="16" viewBox="0 0 16 16" class="text-brown-warm shrink-0">
+          <path d="M8 0 L16 8 L8 16 L0 8 Z" fill="currentColor" opacity="0.6"/>
+          <circle cx="8" cy="8" r="2" fill="currentColor"/>
+        </svg>
         <div class="h-px w-16 bg-stone-400"></div>
       </div>
 
@@ -219,7 +226,7 @@
       <div class="md:w-1/2 relative min-h-75">
         <!-- https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80 -->
         <!-- Fonte da imagem: https://unsplash.com/photos/stack-of-six-brown-hardbound-books-9T346Ij4kGk -->
-        <img src={resolve("/chris-lawton-9T346Ij4kGk-unsplash.jpg")} alt="Livros antigos em uma mesa de madeira. Foto por Chris Lawton obtida no site Unsplash." class="absolute inset-0 w-full h-full object-cover grayscale opacity-80 sepia-[.3]" />
+        <img src={livros_antigos} alt="Livros antigos em uma mesa de madeira. Foto por Chris Lawton obtida no site Unsplash." class="absolute inset-0 w-full h-full object-cover grayscale opacity-80 sepia-[.3]" />
         <div class="absolute inset-0 bg-linear-to-r from-[#f4f1ea] to-transparent md:w-1/3"></div>
       </div>
     </div>

@@ -7,38 +7,9 @@
         BookOpen,
     } from "lucide-svelte";
 
-    const BookCoverSVG = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 140" class="w-full h-full" preserveAspectRatio="xMidYMid slice">
-        <defs>
-            <linearGradient id="paper-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#F7F4EE" stop-opacity="0.4"/>
-            <stop offset="100%" stop-color="#6B5E4E" stop-opacity="0.15"/>
-            </linearGradient>
-        </defs>
-        <rect width="100" height="140" fill="#E9E2D5"/>
-        <rect width="100" height="140" fill="url(#paper-grad)"/>
-        <rect x="6" y="6" width="88" height="128" fill="none" stroke="#6B5E4E" stroke-width="0.8" opacity="0.6"/>
-        <rect x="10" y="10" width="80" height="120" fill="none" stroke="#6B5E4E" stroke-width="0.4" opacity="0.4"/>
-        <rect x="25" y="22" width="50" height="2" fill="#3E3128" opacity="0.7"/>
-        <rect x="30" y="28" width="40" height="2" fill="#3E3128" opacity="0.7"/>
-        <rect x="20" y="34" width="60" height="2" fill="#3E3128" opacity="0.7"/>
-        <circle cx="50" cy="70" r="12" fill="none" stroke="#A67C52" stroke-width="1" opacity="0.6"/>
-        <circle cx="50" cy="70" r="8" fill="none" stroke="#A67C52" stroke-width="0.5" opacity="0.6"/>
-        <path d="M50 58 L50 82 M38 70 L62 70" stroke="#A67C52" stroke-width="0.5" opacity="0.6"/>
-        <circle cx="50" cy="70" r="2" fill="#A67C52" opacity="0.6"/>
-        <rect x="35" y="102" width="30" height="1.5" fill="#3E3128" opacity="0.6"/>
-        <rect x="30" y="108" width="40" height="1.5" fill="#3E3128" opacity="0.6"/>
-        <rect x="40" y="118" width="20" height="1.5" fill="#3E3128" opacity="0.5"/>
-        </svg>
-    `;
+    import capa_livro from "$lib/assets/capa-livro.svg";
+    import cabecalho_autores from '$lib/assets/autores-header.png';
 
-    const divisor_decorativo_antigo = `
-        <svg width="16" height="16" viewBox="0 0 16 16" class="text-brown-warm shrink-0">
-        <path d="M8 0 L16 8 L8 16 L0 8 Z" fill="currentColor" opacity="0.6"/>
-        <circle cx="8" cy="8" r="2" fill="currentColor"/>
-        </svg>
-    `
-    
 </script>
 
 <svelte:head>
@@ -58,16 +29,18 @@
 </nav>
 
 <!-- Header with Portrait Background -->
-<header class="relative bg-cream overflow-hidden w-full">
+<header class="relative bg-cream overflow-hidden w-full h-66">
   <!-- Background portrait image with gradient mask -->
   <div
-    class="absolute inset-0 bg-[url('/autores-header.png')] bg-cover bg-right"
+    class="absolute inset-0 overflow-hidden"
     style="
       mask-image: linear-gradient(90deg, transparent 0%, transparent 40%, black 70%);
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 40%, black 70%);
       opacity: 0.75;
     "
-  ></div>
+  >
+    <img class="w-full h-full object-cover object-right" src={cabecalho_autores} alt="Cabeçalho da área dos autores."/>
+  </div>
 
   <!-- Subtle overlay for text readability -->
   <div class="absolute inset-0 bg-cream/60 pointer-events-none"></div>
@@ -84,7 +57,10 @@
       <!-- Decorative Divider -->
       <div class="flex items-center gap-4 my-6 max-w-xs">
         <div class="h-px flex-1 bg-brown-mid/40"></div>
-            {@html divisor_decorativo_antigo}
+          <svg width="16" height="16" viewBox="0 0 16 16" class="text-brown-warm shrink-0">
+            <path d="M8 0 L16 8 L8 16 L0 8 Z" fill="currentColor" opacity="0.6"/>
+            <circle cx="8" cy="8" r="2" fill="currentColor"/>
+          </svg>
         <div class="h-px flex-1 bg-brown-mid/40"></div>
       </div>
     </div>
@@ -249,7 +225,7 @@
               <!-- Obra -->
               <div class="col-span-4 flex items-center gap-4">
                 <div class="w-10 h-14 shrink-0 bg-beige rounded-sm overflow-hidden border border-brown-mid/10 shadow-sm">
-                  {@html BookCoverSVG}
+                  <img class="" src={capa_livro} alt="Capa do livro" />
                 </div>
                 <span class="font-serif text-base font-semibold text-brown-dark group-hover:text-brown-warm transition-colors">
                   {obra.nome}

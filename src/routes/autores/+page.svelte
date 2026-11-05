@@ -1,35 +1,12 @@
 <script lang="ts">
     import { resolve } from '$app/paths';
     import { Search, ChevronDown } from "lucide-svelte";
+    import cabecalho_autores from '$lib/assets/autores-header.png';
 
     // SVG Profile Placeholders
-    const PerfilMasculino = `
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100" height="100" fill="#E9E2D5"/>
-        <circle cx="50" cy="35" r="20" fill="#6B5E4E"/>
-        <path d="M 20 90 Q 50 70 80 90 L 80 100 L 20 100 Z" fill="#6B5E4E"/>
-        <path d="M 30 90 Q 50 85 70 90" stroke="#3E3128" stroke-width="2" fill="none"/>
-        </svg>
-    `;
-
-    const PerfilFeminino = `
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100" height="100" fill="#E9E2D5"/>
-        <circle cx="50" cy="35" r="18" fill="#6B5E4E"/>
-        <path d="M 25 90 Q 50 75 75 90 L 75 100 L 25 100 Z" fill="#6B5E4E"/>
-        <path d="M 35 20 Q 50 10 65 20" stroke="#6B5E4E" stroke-width="3" fill="none"/>
-        <path d="M 30 90 Q 50 85 70 90" stroke="#3E3128" stroke-width="2" fill="none"/>
-        </svg>
-    `;
-
-    const PerfilDesconhecido = `
-        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-        <rect width="100" height="100" fill="#E9E2D5"/>
-        <circle cx="50" cy="40" r="20" fill="#6B5E4E"/>
-        <path d="M 20 90 Q 50 70 80 90 L 80 100 L 20 100 Z" fill="#6B5E4E"/>
-        <text x="50" y="45" text-anchor="middle" fill="#3E3128" font-size="20" font-family="serif">?</text>
-        </svg>
-    `;
+    import PerfilMasculino from "$lib/assets/perfil-masculino.svg";
+    import PerfilFeminino from "$lib/assets/perfil-feminino.svg";
+    import PerfilDesconhecido from "$lib/assets/perfil-desconhecido.svg";
 
     let { data } = $props();
 
@@ -109,10 +86,12 @@
 </nav>
 
 <!-- Header -->
-<header class="bg-cream relative overflow-hidden w-full">
+<header class="bg-cream relative overflow-hidden w-full h-66">
     <div 
-    class="absolute inset-0 bg-[url('/autores-header.png')] bg-cover bg-center"
-    ></div>
+    class="absolute inset-0 overflow-hidden"
+    >
+      <img class="w-full h-full object-cover object-right" src={cabecalho_autores} alt="Cabeçalho da área dos autores."/>
+    </div>
     <div class="absolute inset-0 bg-cream/70 pointer-events-none"></div>
 
     <div class="relative z-10 mx-auto max-w-7xl px-6 py-12">
@@ -125,8 +104,8 @@
             <div class="flex items-center gap-4 my-6 max-w-md">
                 <div class="h-px flex-1 bg-brown-mid/40"></div>
                 <svg width="16" height="16" viewBox="0 0 16 16" class="text-brown-warm shrink-0">
-                <path d="M8 0 L16 8 L8 16 L0 8 Z" fill="currentColor" opacity="0.6"/>
-                <circle cx="8" cy="8" r="2" fill="currentColor"/>
+                  <path d="M8 0 L16 8 L8 16 L0 8 Z" fill="currentColor" opacity="0.6"/>
+                  <circle cx="8" cy="8" r="2" fill="currentColor"/>
                 </svg>
                 <div class="h-px flex-1 bg-brown-mid/40"></div>
             </div>
@@ -151,7 +130,7 @@
     <div class="flex flex-col lg:flex-row gap-8">
       
       <!-- Sidebar Filters -->
-      <aside class="w-full lg:w-64 shrink-0">
+      <aside class="w-full lg:w-72 shrink-0">
         <div class="bg-beige/40 border border-beige rounded-sm p-6 sticky top-8">
           <!-- Fixed Header Layout -->
         <div class="flex items-start justify-between mb-8 pb-6 border-b border-beige">
@@ -315,7 +294,7 @@
         <!-- Results count and view toggle -->
         <div class="flex items-center justify-between mb-6">
           <p class="text-brown-dark font-serif text-lg">
-            {autores_filtrados.length} {#if autores_filtrados.length > 1}autores encontrados{:else}autor encontrado{/if}
+            {autores_filtrados.length} {#if autores_filtrados.length > 1}autores encontrados{:else}autor encontrado{/if} de um total de {data.autores.length}.
           </p>
           <!-- <div class="flex items-center gap-2">
             <button class="p-2 rounded-sm bg-brown-dark text-cream">
@@ -334,7 +313,7 @@
               <a href="{resolve("/autores")}/{autor.url_simples}">
                 <!-- Profile Image -->
                 <div class="mb-4 overflow-hidden rounded-sm bg-beige aspect-4/5">
-                    {@html getSVGPerfil("desconhecido")}
+                    <img class="" src={getSVGPerfil("desconhecido")} alt="Perfil do autor" />
                 </div>
                 
                 <!-- Author Info -->

@@ -2,37 +2,34 @@
     let { data } = $props();
 
     import {
-        BookOpen,
-        User,
-        BookMarked,
-        Map,
-        Search,
         ArrowRight,
-        Quote,
     } from "lucide-svelte";
+
     import { resolve } from '$app/paths';
+    import imagem_flibusteiro from "$lib/assets/novo-correio-de-modas-capa-o-flibusteiro.jpg";
+    import mapa_brasil from "$lib/assets/mapa-brasil-footer.png";
 
     const features = $derived([
         {
-            // icon: User,
+            url: '/autores',
             total: data.autores,
             title: "Autores",
             desc: "Escritores de língua alemã lidos no Brasil oitocentista.",
         },
         {
-            // icon: BookMarked,
+            url: '/obras',
             total: data.obras,
             title: "Obras",
             desc: "Obras de língua alemã que circularam no Brasil oitocentista.",
         },
         {
-            // icon: Map,
+            url: '',
             total: data.fontes,
             title: "Fontes",
             desc: "Catálogos de livreiros, periódicos e catálogos de biblioteca.",
         },
         {
-            // icon: BarChart3,
+            url: '',
             total: data.cidades,
             title: "Cidades",
             desc: "Locais de publicação de obras originais e traduzidas.",
@@ -80,7 +77,7 @@
   </div>
   <img 
     alt="Capa do periódico Novo Correio de Modas." 
-    src={resolve("/novo-correio-de-modas-capa-o-flibusteiro.jpg")}
+    src={imagem_flibusteiro}
     class="pointer-events-none absolute right-8 top-1/2 w-95 -translate-y-1/2 rotate-10 opacity-20 shadow-2xl lg:w-112.5 lg:opacity-90"
   />
 </section>
@@ -90,6 +87,7 @@
   <div class="mx-auto max-w-7xl px-6 py-12">
     <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-0 lg:divide-x lg:divide-brown-mid/20">
       {#each features as feature}
+      {#if feature.url == ''}
         <div class="group text-center px-4">
           <div
             class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-beige/60 transition-colors group-hover:bg-brown-warm/20"
@@ -108,6 +106,26 @@
             {feature.desc}
           </p>
         </div>
+        {:else}
+        <a class="group text-center px-4" href={feature.url}>
+          <div
+            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-beige/60 transition-colors group-hover:bg-brown-warm/20"
+          >
+            <!-- <svelte:component
+              this={feature.icon}
+              class="h-6 w-6 text-brown-dark"
+              stroke-width={1.5}
+            /> -->
+            <span class="font-bold text-lg">{feature.total}</span>
+          </div>
+          <h3 class="font-serif text-lg font-semibold text-brown-dark">
+            {feature.title}
+          </h3>
+          <p class="mt-2 text-sm leading-relaxed text-brown-mid">
+            {feature.desc}
+          </p>
+        </a>
+        {/if}
       {/each}
     </div>
   </div>
@@ -116,7 +134,7 @@
 <!-- ===================== QUOTE ===================== -->
 <section class="relative overflow-hidden bg-beige/40 w-full">
   <div class="mx-auto max-w-7xl px-6 py-20 lg:py-28">
-    <div class="relative z-10 mx-auto max-w-3xl text-center h-52">
+    <div class="relative z-10 mx-auto max-w-3xl text-center h-42">
       <!-- <Quote class="mx-auto mb-6 h-8 w-8 text-brown-warm/50" stroke-width={1} />
       <blockquote
         class="font-serif text-2xl font-medium leading-relaxed text-brown-dark md:text-3xl lg:text-3xl"
@@ -148,7 +166,7 @@
     Faz parte da obra Illustrated atlas and modern history, publicada por John Tallis. 
     Como todos os mapas desse atlas, caracteriza-se pelas belas ilustrações. 
     O Brasil está representado com as divisões administrativas, além de constarem o Paraguai e o Uruguai. " 
-      src={resolve("/mapa-brasil-footer.png")}
+      src={mapa_brasil}
       class="absolute top-0 left-0 right-0 w-full opacity-20"
     />
   </div>

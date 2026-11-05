@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" preserveAspectRatio="xMidYMid slice">
+        <defs>
+            <linearGradient id="paper-grad-large" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#F7F4EE" stop-opacity="0.5"/>
+            <stop offset="50%" stop-color="#E9E2D5" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#6B5E4E" stop-opacity="0.2"/>
+            </linearGradient>
+            <filter id="aged">
+            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise"/>
+            <feColorMatrix type="matrix" values="1 0 0 0 0  0 0.95 0 0 0  0 0.85 0 0 0  0 0 0 0.08 0" in="noise" result="coloredNoise"/>
+            <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply"/>
+            </filter>
+        </defs>
+        <rect width="200" height="280" fill="#E9E2D5" filter="url(#aged)"/>
+        <rect width="200" height="280" fill="url(#paper-grad-large)"/>
+        
+        <!-- Outer border -->
+        <rect x="12" y="12" width="176" height="256" fill="none" stroke="#3E3128" stroke-width="1.5" opacity="0.5"/>
+        <rect x="18" y="18" width="164" height="244" fill="none" stroke="#3E3128" stroke-width="0.5" opacity="0.4"/>
+        
+        <!-- Simulated title block -->
+        <rect x="40" y="40" width="120" height="4" fill="#3E3128" opacity="0.75"/>
+        <rect x="50" y="50" width="100" height="3" fill="#3E3128" opacity="0.65"/>
+        <rect x="30" y="60" width="140" height="3" fill="#3E3128" opacity="0.7"/>
+        <rect x="60" y="70" width="80" height="2" fill="#3E3128" opacity="0.5"/>
+        
+        <!-- Central ornament -->
+        <circle cx="100" cy="140" r="25" fill="none" stroke="#A67C52" stroke-width="1.5" opacity="0.5"/>
+        <circle cx="100" cy="140" r="18" fill="none" stroke="#A67C52" stroke-width="0.8" opacity="0.5"/>
+        <circle cx="100" cy="140" r="10" fill="none" stroke="#A67C52" stroke-width="0.5" opacity="0.4"/>
+        <path d="M100 115 L100 165 M75 140 L125 140" stroke="#A67C52" stroke-width="0.8" opacity="0.5"/>
+        <circle cx="100" cy="140" r="3" fill="#A67C52" opacity="0.6"/>
+        
+        <!-- Simulated author/publisher text -->
+        <rect x="70" y="200" width="60" height="2.5" fill="#3E3128" opacity="0.6"/>
+        <rect x="55" y="210" width="90" height="2" fill="#3E3128" opacity="0.55"/>
+        <rect x="80" y="230" width="40" height="2" fill="#3E3128" opacity="0.5"/>
+        
+        <!-- Simulated illustration area -->
+        <rect x="50" y="85" width="100" height="40" fill="#6B5E4E" opacity="0.08" rx="2"/>
+        </svg>

@@ -1,18 +1,18 @@
 <script lang="ts">
+	
 	import "$lib/shared.css";
 	import { resolve } from '$app/paths';
 
     const navLinks = [
         {"label": "Catálogo", "href": "/obras"},
         {"label": "Autores", "href": "/autores"},
+		{"label": "Análise", "href": "/analise"},
 		{"label": "Sobre o projeto", "href": "/sobre-o-projeto"},
     ];
 
 	let { children } = $props();
 
-	const livro_aberto = `
-		<svg class="w-10 h-10 text-stone-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-	`;
+	import livro_aberto from "$lib/assets/icone-livro-aberto.svg";
 </script>
 
 <div class="flex w-full justify-center bg-offwhite">
@@ -29,7 +29,7 @@
 				<a href={resolve("/")}>
 					<div class="flex items-center gap-3">
 						<!-- <BookOpen class="h-7 w-7 text-brown-dark" stroke-width={1.5} /> -->
-						{@html livro_aberto}
+						<img class="w-10 h-10" src={livro_aberto} alt="Ícone de livro aberto" />
 						<div class="leading-tight">
 							<p class="font-serif text-[16px] font-semibold uppercase tracking-wider text-brown-dark">
 							Literatura de Língua Alemã
