@@ -11,25 +11,25 @@
 
     const features = $derived([
         {
-            url: '/autores',
+            url: resolve('/autores'),
             total: data.autores,
             title: "Autores",
             desc: "Escritores de língua alemã lidos no Brasil oitocentista.",
         },
         {
-            url: '/obras',
+            url: resolve('/obras'),
             total: data.obras,
             title: "Obras",
             desc: "Obras de língua alemã que circularam no Brasil oitocentista.",
         },
         {
-            url: '',
+            url: resolve(''),
             total: data.fontes,
             title: "Fontes",
             desc: "Catálogos de livreiros, periódicos e catálogos de biblioteca.",
         },
         {
-            url: '',
+            url: resolve(''),
             total: data.cidades,
             title: "Cidades",
             desc: "Locais de publicação de obras originais e traduzidas.",
